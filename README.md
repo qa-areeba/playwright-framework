@@ -1,5 +1,8 @@
 # 🛒 E-Commerce Automation Suite (Playwright + TypeScript)
 
+![CI](https://github.com/qa-areeba/playwright-ecommerce-suite/actions/workflows/playwright-tests.yml/badge.svg)
+
+
 This project is an end-to-end automation suite for a sample e-commerce application using [Playwright](https://playwright.dev/) and TypeScript. It covers key user flows such as registration, login, and logout, and is integrated with GitHub Actions for Continuous Integration.
 
 ## 📌 Features
