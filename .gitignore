@@ -1,0 +1,9 @@
+# Node modules and build artifacts
+node_modules/
+test-results/
+playwright-report/
+*.log
+
+# Editor-specific configs
+.idea/
+.vscode/
