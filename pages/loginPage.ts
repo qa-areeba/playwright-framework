@@ -23,8 +23,9 @@ export class LoginPage {
   }
 
   async getAccountTexts(): Promise<string[]> {
-    await this.page.waitForSelector(LoginSelectors.accountLabel);
-    return await this.page.locator(LoginSelectors.accountLabel).allTextContents();
+    await this.page.waitForSelector(LoginSelectors.accountLabel, { state: 'visible' });
+    const allTexts = await this.page.locator(LoginSelectors.accountLabel).allTextContents();
+    return allTexts.filter(text => text.trim() !== '');
   }
 
   async logout() {
