@@ -42,6 +42,8 @@ This project is an end-to-end automation suite for a sample e-commerce applicati
 
 ### Install Dependencies
 
+
+
 ```bash
 npm install
 npx playwright install
@@ -75,3 +77,5 @@ Scroll to the Artifacts section and download the HTML report
 Areeba Zakir Quality Assurance Engineer | Playwright Automation Specialist
 
 > “A good test suite catches bugs. A great one prevents them.”
+
+<!-- Triggering GitHub cache refresh -->
