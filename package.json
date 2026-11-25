@@ -1,14 +1,21 @@
 {
   "name": "playwright-ecommerce-suite",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "Playwright and TypeScript UI test automation for the Tricentis Demo Web Shop, using the Page Object Model and GitHub Actions CI",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "playwright test",
+    "test:register": "playwright test tests/register.spec.ts",
+    "report": "playwright show-report"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "playwright",
+    "typescript",
+    "test-automation",
+    "page-object-model",
+    "github-actions"
+  ],
+  "author": "Areeba Zakir",
   "license": "ISC",
-  "description": "",
   "devDependencies": {
     "@playwright/test": "^1.53.1",
     "@types/node": "^24.0.3",
