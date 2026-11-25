@@ -1,81 +1,86 @@
-# 🛒 E-Commerce Automation Suite (Playwright + TypeScript)
+# Playwright E-Commerce Test Automation (TypeScript)
 
-![CI](https://github.com/qa-areeba/playwright-ecommerce-suite/actions/workflows/playwright-tests.yml/badge.svg)
+![Playwright Tests](https://github.com/qa-areeba/playwright-framework/actions/workflows/playwright-tests.yml/badge.svg)
 
+End-to-end UI test automation for the [Tricentis Demo Web Shop](https://demowebshop.tricentis.com), built with [Playwright](https://playwright.dev/) and TypeScript using the Page Object Model. The suite runs in GitHub Actions on every push and pull request.
 
-This project is an end-to-end automation suite for a sample e-commerce application using [Playwright](https://playwright.dev/) and TypeScript. It covers key user flows such as registration, login, and logout, and is integrated with GitHub Actions for Continuous Integration.
+## What is tested
 
-## 📌 Features
+| Area | Spec file | Tests |
+| --- | --- | --- |
+| Homepage smoke check (page title) | `tests/homepage.spec.ts` | 1 |
+| Registration with a unique e-mail | `tests/register.spec.ts` | 1 |
+| Login with the registered user | `tests/login.spec.ts` | 1 |
+| Logout | `tests/logout.spec.ts` | 1 |
+| Negative login (wrong password, empty form) | `tests/login.negative.spec.ts` | 2 |
+| Data-driven invalid login (5 data sets) | `tests/login.dataDriven.spec.ts` | 5 |
+| **Total** | | **11** |
 
-- Automated tests for user registration, login validations, and logout
-- Dynamic email generation to ensure test repeatability
-- Test data sharing across specs using a JSON file
-- Modular structure based on the Page Object Model (POM)
-- CI setup with GitHub Actions for test execution on every push
-- HTML report generation
+## Features
 
-## 🛠 Tech Stack
+- Page Object Model (`pages/`) with selectors and UI messages kept in one place (`selectors.ts`, `messages.ts`)
+- Unique e-mail generated at run time so registration can be repeated
+- Test data shared between specs through `data/testData.json`
+- Data-driven negative login tests (`data/invalidLoginData.ts`)
+- Headless in CI, headed locally
+- HTML report generated on every run and uploaded as a CI artifact
 
-- [Playwright](https://playwright.dev/) (Test runner)
-- TypeScript
-- Node.js
-- GitHub Actions (CI/CD)
+## Tech stack
 
-## 📁 Folder Structure
+- [Playwright](https://playwright.dev/) test runner
+- TypeScript, Node.js 20
+- GitHub Actions (CI)
 
-├── tests/               # Test cases
-├── pages/               # Page Object Model classes
-├── utils/               # Helpers like test data utilities
-├── data/                # Generated test data (e.g., testData.json)
-├── messages.ts          # UI success and error messages
-├── playwright.config.ts # Test runner configuration
-├── .github/workflows/   # CI workflow file
-└── README.md
+## Project structure
 
+```text
+.
+├── .github/workflows/playwright-tests.yml   # CI workflow
+├── data/                                    # Test data (invalid logins, registered user)
+├── pages/                                   # Page Object Model classes
+├── tests/                                   # Test specs
+├── utils/                                   # Helpers (unique e-mail, test data, login)
+├── messages.ts                              # Expected UI messages
+├── selectors.ts                             # Locators used by the page objects
+├── playwright.config.ts                     # Runner configuration
+└── package.json
+```
 
-## 🚀 Getting Started
+## Getting started
 
-### Prerequisites
-
-- Node.js and npm installed
-- Git
-
-### Install Dependencies
-
-
+Prerequisites: Node.js 20 or later and Git.
 
 ```bash
-npm install
+git clone https://github.com/qa-areeba/playwright-framework.git
+cd playwright-framework
+npm ci
 npx playwright install
-Run Tests Locally
-bash
-npx playwright test
-View the HTML Report
-bash
-npx playwright show-report
-🔄 Continuous Integration (CI)
-CI is configured using GitHub Actions:
+```
 
-Workflow: .github/workflows/playwright-tests.yml
+## Run the tests
 
-Runs tests on every push to master
+```bash
+npm test                  # run all tests
+npm run test:register     # run only the registration test
+npm run report            # open the HTML report
+```
 
-Generates and uploads the HTML report as a downloadable artifact
+### Test data note
 
-📥 Downloading CI Reports
-After a workflow run:
+The registration test creates a user with a unique e-mail (`user_<timestamp>@example.com`) and saves it to `data/testData.json`. The login and logout tests read that file, so when running a single spec, run `npm run test:register` first.
 
-Go to your GitHub repository
+## Continuous integration
 
-Click on the Actions tab
+The workflow `.github/workflows/playwright-tests.yml` runs on every push and pull request. It:
 
-Select the latest successful run
+1. installs dependencies with `npm ci` and the Playwright browsers,
+2. runs the registration test to generate the test data,
+3. runs all remaining tests,
+4. uploads the HTML report as the `playwright-report` artifact.
 
-Scroll to the Artifacts section and download the HTML report
+To download the report: open the **Actions** tab, select a run, and download `playwright-report` under **Artifacts**.
 
-👤 Author
-Areeba Zakir Quality Assurance Engineer | Playwright Automation Specialist
+## Author
 
-> “A good test suite catches bugs. A great one prevents them.”
-
-<!-- Triggering GitHub cache refresh -->
+Areeba Zakir, QA Automation Engineer
+[LinkedIn](https://www.linkedin.com/in/areeba-zakir-38364328b) · [GitHub](https://github.com/qa-areeba)
