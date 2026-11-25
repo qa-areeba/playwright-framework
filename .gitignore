@@ -7,3 +7,4 @@ playwright-report/
 # Editor-specific configs
 .idea/
 .vscode/
+*.iml
